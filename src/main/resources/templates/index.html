@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Loan Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet"  type="text/css" href="../css/style.css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <script type="text/javascript">
+    //<![CDATA[
+        $(document).ready(function(){
+
+
+
+            $window = $(window);
+
+            $(".tableContainer").hide();
+            $("#closeButton").hide();
+            $("#viewSchedule").click(function() {
+
+                $(".tableContainer").show();
+                $('html, body').animate({
+                    scrollTop: $("#seperator1").offset().top
+                }, 1000);
+
+
+            });
+
+            $("#calcButton").click(function(){
+                $("#viewSchedule").show("slow");
+                $(".tableContainer").hide();
+                $("div .alert").show();
+            });
+
+            $("#closeButton").click(function(){
+
+                $('html, body').animate({
+                    scrollTop: $(".container").offset().top
+                }, 2000);
+
+                $(".tableContainer").hide("slow");
+                $("#closeButton").hide();
+                $("div .alert").hide();
+                $("#viewSchedule").hide();
+
+            });
+
+            //check if scrroll is on amotization
+            $($window).scroll(function(){
+                $scroll_position = $window.scrollTop();
+                if($scroll_position >= $("#seperator1").offset().top ){
+                     $("#closeButton").show();
+                }else if($scroll_position < $("#seperator1").offset().top){
+                    $("#closeButton").hide();
+                }
+
+            });
+
+
+            //listen to button click to navigate
+            $(".desktopVersionButton").click(function(){
+                window.location.href = '/desktop';
+            });
+
+            $(".androidVersionButton").click(function(){
+                window.location.href = '/android';
+            });
+
+            $(".iosVersionButton").click(function(){
+                window.location.href = '/ios';
+            });
+
+
+
+
+
+
+
+
+        });
+
+//]]>
+    </script>
+
+    <style>
+
+        .close_container{
+            top:15px;
+            right: 15px;
+            position: fixed;
+        }
+
+        .btn #viewSchedule{
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+        }
+
+        .btn{
+            border-color:#fff;
+        }
+
+
+
+
+        /* title */
+        .navbar-default .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus{
+            color: #fff;
+        }
+
+        .buttonList li{
+            margin-left: 5px;
+            margin-right: 2px;
+        }
+
+        body{
+            background-color: #D3D3D3;
+        }
+
+        .container{
+            border: 1px solid #fff;
+        }
+
+
+    </style>
+    <div class="container">
+
+<!--Navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid btn-primary">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Loan Calculator</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav buttonList">
+                    <li class="active"><button type="button" class="btn btn-default navbar-btn btn-success desktopVersionButton">Desktop Version</button></li>
+                    <li style="display:none"><button type="button"  class="btn btn-default navbar-btn btn-success androidVersionButton">Android Version</button></li>
+                    <li style="display:none"><button type="button"  class="btn btn-default navbar-btn btn-success iosVersionButton">iOS Version</button></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right buttonList">
+                    <li style="display:none;"><button type="button" class="btn btn-default navbar-btn btn-success">Terms of Service</button></li>
+                    <li  style="display:none;"><button type="button" class="btn btn-default navbar-btn btn-success">Privacy Policy</button></li>
+                </ul>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+
+    </nav>
+
+
+
+        <!--form-->
+        <form title="Loan calculator form"  th:action="@{/}" th:object="${loan}"  method="post">
+
+            <label for="loanAmountInput">Loan amount: </label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input type="text" th:field="*{userLoanAmount}"  class="form-control" id="loanAmountInput" aria-label="Amount (to the nearest dollar)" aria-describedby="sizing-addon1"/>
+            </div>
+            <br/>
+
+            <label for="loanTermDiv">Loan Term: </label>
+
+                <div class="row" id="loanTermDiv">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Years</span>
+                            <input type="text" th:field="*{userLoanTermYears}" class="form-control" id="loanTermInYearInput" aria-label="Amount must be a whole number" aria-describedby="sizing-addon1"/>
+                        </div>
+                        </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Months</span>
+                            <input type="text" th:field="*{userLoanTermMonths}" class="form-control" id="loanTermMonthsInput" aria-label="Amount must be a whole  number" aria-describedby="sizing-addon1"/>
+                        </div>
+                    </div>
+
+                </div>
+
+            <br />
+
+            <label for="interestRateInput">Interest rate per year in %: </label>
+            <div class="input-group">
+                <input type="text" th:field="*{userLoanInterestRate}" class="form-control" id="interestRateInput" aria-label="Amount should be a number or a decimal value" aria-describedby="sizing-addon1"/>
+                <span class="input-group-addon">%</span>
+            </div>
+
+            <br/>
+
+            <div  class="row">
+                <div class="col-md-6 col-md-offset-3">
+
+                    <button  type="submit" class="btn btn-primary btn-lg btn-block" value="Calculate" id="calcButton">Calculate</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" id="viewSchedule">View Schedule</button>
+                </div>
+            </div>
+
+        </form>
+        <br/>
+        <div class="alert btn-primary" role="alert">
+            <p th:text="${loan.monthlyPaymentFormatted}">Monthly payments: $0.00</p>
+            <p th:text="${loan.numberofPaymentsFormatted}"></p>
+            <p th:text="${loan.loanAmountFormatted}"></p>
+            <p th:text="${loan.loanInterestFormatted}"></p>
+            <p th:text="${loan.loanTermFormatted}"></p>
+            <p th:text="${loan.totalInterestFormatted}">Total Interest: $2000</p>
+            <p th:text="${loan.totalPaymentFormatted}">Total Payment: $6466.99</p>
+        </div>
+
+        <br/>
+        <!--progressbar-->
+        <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" >
+
+        </div>
+
+        <br/>
+        <div class="close_container">
+            <button id="closeButton" type="button" class="btn btn-primary btn-sm pull-right">Close</button>
+        </div>
+        <br/>
+        <hr id="seperator1"/>
+        <div class="tableContainer">
+
+            <!--AMORTIZAITION SCHEDULE TABLE-->
+            <h2>Amortization Schedule</h2>
+            <table class="table" id="myTable">
+                <div id="tableHeadDiv">
+
+                    <thead class="tableHead">
+                    <tr>
+                        <th>Month#</th>
+                        <th>Monthly Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Total Interest</th>
+                        <th>Balance</th>
+                    </tr>
+                    </thead>
+                </div>
+
+
+                <tbody>
+                <tr class="success"  th:each="scheduleItem : ${loan.scheduleArrayList}">
+                    <td><p th:text="${scheduleItem.month}"></p></td>
+                    <td><p th:text="${scheduleItem.monthlyPaymentFormatted}"></p></td>
+                    <td><p th:text="${scheduleItem.principalPaidFormatted}"></p></td>
+                    <td><p th:text="${scheduleItem.interestPaidFormatted}"></p></td>
+                    <td><p th:text="${scheduleItem.cumulativeInterestFormatted}"></p></td>
+                    <td><p th:text="${scheduleItem.newBalanceFormatted}"></p></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted"></p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
