@@ -4,6 +4,8 @@ import Model.Loan;
 import Model.ScheduleItem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 @Controller
 @ComponentScan
 @EnableAutoConfiguration
-public class SampleController {
+public class SampleController extends SpringBootServletInitializer {
 
     private ArrayList<ScheduleItem> scheduleItemList = new ArrayList<ScheduleItem>();
 
@@ -170,6 +172,11 @@ public class SampleController {
 
     public static void main(String[] args) {
         SpringApplication.run(SampleController.class, args);
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(SampleController.class);
     }
 
 }
