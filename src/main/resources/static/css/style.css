@@ -1,0 +1,39 @@
+.close_container{
+            top:15px;
+            right: 15px;
+            position: fixed;
+        }
+
+        .btn #viewSchedule{
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+        }
+
+        .btn{
+            border-color:#fff;
+        }
+
+
+
+
+        /* title */
+        .navbar-default .navbar-brand {
+            color: #fff;
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus{
+            color: #fff;
+        }
+
+        .buttonList li{
+            margin-left: 5px;
+            margin-right: 2px;
+        }
+
+
+
+        .container{
+            border: 1px solid #fff;
+        }
