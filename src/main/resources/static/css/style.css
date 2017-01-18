@@ -1,4 +1,4 @@
-.close_container{
+        .close_container{
             top:15px;
             right: 15px;
             position: fixed;
@@ -13,8 +13,6 @@
         .btn{
             border-color:#fff;
         }
-
-
 
 
         /* title */
