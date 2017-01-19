@@ -106,20 +106,17 @@
         </form>
         <br/>
         <div class="alert btn-primary" role="alert">
-            <p th:text="${loan.monthlyPaymentFormatted}">Monthly payments: $0.00</p>
+            <p th:text="${loan.monthlyPaymentFormatted}"></p>
             <p th:text="${loan.numberofPaymentsFormatted}"></p>
             <p th:text="${loan.loanAmountFormatted}"></p>
             <p th:text="${loan.loanInterestFormatted}"></p>
             <p th:text="${loan.loanTermFormatted}"></p>
-            <p th:text="${loan.totalInterestFormatted}">Total Interest: $2000</p>
-            <p th:text="${loan.totalPaymentFormatted}">Total Payment: $6466.99</p>
+            <p th:text="${loan.totalInterestFormatted}"></p>
+            <p th:text="${loan.totalPaymentFormatted}"></p>
         </div>
 
         <br/>
-        <!--progressbar-->
-        <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" >
 
-        </div>
 
         <br/>
         <div class="close_container">

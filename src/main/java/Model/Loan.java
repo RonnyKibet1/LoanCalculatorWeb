@@ -7,10 +7,10 @@ import java.util.ArrayList;
  */
 public class Loan {
 
-    private double userLoanAmount;
-    private int userLoanTermYears;
-    private int userLoanTermMonths;
-    private double userLoanInterestRate;
+    private double userLoanAmount = 10000.0;
+    private int userLoanTermYears = 5;
+    private int userLoanTermMonths = 0;
+    private double userLoanInterestRate = 4.325;
 
     private String loanAmountFormatted;
     private String loanInterestFormatted;

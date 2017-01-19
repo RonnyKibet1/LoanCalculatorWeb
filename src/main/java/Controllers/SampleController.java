@@ -29,7 +29,9 @@ public class SampleController extends SpringBootServletInitializer {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap model) {
-        model.addAttribute("loan", new Loan());
+        Loan loan = new Loan();
+        model.addAttribute("loan", loan);
+        calculateButtonPressed(loan);
         return "index";
     }
 
